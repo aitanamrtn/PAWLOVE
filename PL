@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PawLove - Personaliza tu Collar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>PawLove - Personaliza tu Collar Inteligente</h1>
+  </header>
+  <main>
+    <section class="customizer">
+      <h2>Personaliza tu diseño</h2>
+      <div class="controls">
+        <label for="color">Elige un color:</label>
+        <input type="color" id="color" name="color" value="#ff6600">
+
+        <label for="pattern">Elige un estampado:</label>
+        <select id="pattern" name="pattern">
+          <option value="none">Ninguno</option>
+          <option value="dots">Puntos</option>
+          <option value="stripes">Rayas</option>
+          <option value="pawprints">Huellas</option>
+        </select>
+      </div>
+      <button id="preview-btn">Vista previa</button>
+    </section>
+    <section class="preview">
+      <h2>Vista previa del collar</h2>
+      <div class="collar" id="collar-preview">
+        <div class="collar-strap"></div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2024 PawLove. Todos los derechos reservados.</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f7f7f7;
+  color: #333;
+}
+
+header {
+  background-color: #ff6600;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
+
+main {
+  padding: 2rem;
+}
+
+.customizer, .preview {
+  margin-bottom: 2rem;
+}
+
+.controls label {
+  display: block;
+  margin: 1rem 0 0.5rem;
+}
+
+.controls input, .controls select {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+button {
+  background-color: #ff6600;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: #e65c00;
+}
+
+.preview {
+  text-align: center;
+}
+
+.collar {
+  width: 300px;
+  height: 50px;
+  margin: 1rem auto;
+  border-radius: 25px;
+  border: 2px solid #333;
+  overflow: hidden;
+  position: relative;
+}
+
+.collar-strap {
+  width: 100%;
+  height: 100%;
+  background-color: #ff6600; /* Default color */
+  position: absolute;
+}
+
+.collar-strap.dots {
+  background-image: radial-gradient(circle, white 10%, transparent 10%);
+  background-size: 20px 20px;
+}
+
+.collar-strap.stripes {
+  background-image: linear-gradient(45deg, white 10%, transparent 10%);
+  background-size: 20px 20px;
+}
+
+.collar-strap.pawprints {
+  background-image: url('pawprints.png'); /* Usa una imagen de huellas */
+  background-size: 50px 50px;
+}
+document.getElementById('preview-btn').addEventListener('click', function () {
+  const color = document.getElementById('color').value;
+  const pattern = document.getElementById('pattern').value;
+  const collarStrap = document.querySelector('.collar-strap');
+
+  // Cambia el color de fondo
+  collarStrap.style.backgroundColor = color;
+
+  // Cambia el estampado
+  collarStrap.className = 'collar-strap'; // Resetea clases
+  if (pattern !== 'none') {
+    collarStrap.classList.add(pattern);
+  }
+});
